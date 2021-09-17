@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px dotted green;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800px" height="600px"></canvas>
+
+
+<script>
+    const myCanvas = document.querySelector('#myCanvas');
+
+    const ctx = myCanvas.getContext('2d');
+
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 10;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    const myMDown = event => {
+        console.log(event.button, event.buttons); // 判斷按下的是左鍵或右鍵
+
+        // 忽略滑鼠右鍵
+        if(event.button===2 && event.buttons===2){
+            return;
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(event.offsetX, event.offsetY);
+        myCanvas.addEventListener('mousemove', myMMove);
+    };
+    const myMUp = event => {
+        myCanvas.removeEventListener('mousemove', myMMove);
+    };
+    const myMMove = event => {
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.stroke();
+    };
+    myCanvas.addEventListener('mousedown', myMDown);
+    window.addEventListener('mouseup', myMUp);
+
+
+</script>
+
+</body>
+</html>
