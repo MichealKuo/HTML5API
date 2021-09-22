@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="info"></div>
+
+<script>
+    const info = document.querySelector('#info');
+
+    const es = new EventSource('/try-sse');
+
+    es.addEventListener('open', event =>{
+        console.log('open:', event.type, new Date().toString());
+    });
+    es.addEventListener('message', event =>{
+        console.log(event.lastEventId, event.data);
+        info.innerText = event.lastEventId + ': ' + event.data;
+    });
+    es.addEventListener('error', event =>{
+        console.log('error:', event, new Date().toString());
+    });
+
+
+
+</script>
+</body>
+</html>

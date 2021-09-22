@@ -13,15 +13,7 @@
             height: 600px;
             background-color: #EEEEEE;
         }
-        .ball {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: red;
-            left: 100px;
-            top: 50px;
-        }
+
         .rect {
             position: absolute;
             width: 200px;
@@ -37,30 +29,25 @@
 <body>
 
 <div class="container">
-    <div class="ball" draggable="true"></div>
-
     <div class="rect"></div>
 </div>
 
 
 <script>
-    const ball = document.querySelector('.ball');
     const rect = document.querySelector('.rect');
-
-    const listener = event => {
-        console.log(event.type, event.target);
-
-    };
-    ball.addEventListener('dragstart', listener);
-    // ball.addEventListener('drag', listener);
-    ball.addEventListener('dragend', listener);
-
-    rect.addEventListener('dragenter', listener);
-    rect.addEventListener('dragover', event =>{
-        event.preventDefault();  //沒有preventDefault() 就無法觸發drag事件
+    rect.addEventListener('dragenter', event => {
+        rect.style.backgroundColor = '#eea77b';
     });
-    rect.addEventListener('dragleave', listener);
-    rect.addEventListener('dragend', listener);
+    rect.addEventListener('dragleave', event => {
+        rect.style.backgroundColor = '#96becd';
+    });
+    rect.addEventListener('dragover', event=>event.preventDefault());
+    rect.addEventListener('drop', event => {
+        event.preventDefault();  // 避免瀏覽器去開啟該檔案
+        console.log( event.dataTransfer.files );
+        // single =>  file
+
+    });
 
 </script>
 
