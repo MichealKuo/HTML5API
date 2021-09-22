@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="myi" accept="image/*">
+
+
+
+    <script>
+
+        const myinput = document.querySelector('#myi');
+
+        const reader = new FileReader();
+
+
+        reader.addEventListener('load',event =>{
+            console.log(reader.result);
+        })
+
+        myinput.addEventListener('change', event => {
+            // console.log(myinput.files);
+            // console.log(myinput.files[0]);
+
+            reader.readAsDataURL(myinput.files[0]);
+            //log那邊會拿到一組base64碼 貼到url可得到照片
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" id="myi" accept="image/*">
+<br>
+<script>
+    const myinput = document.querySelector('#myi');
+    const reader = new FileReader();
+    const img = new Image();
+
+    img.addEventListener('load', event => {
+        console.log('圖片 render 完成');
+        document.body.append(img);
+    });
+
+    reader.addEventListener('load', event => {
+        console.log(reader.result);
+        img.src = reader.result;
+    });
+
+    myinput.addEventListener('change', event=>{
+        // console.log(myinput.files[0]);
+        reader.readAsDataURL(myinput.files[0]);
+    });
+
+</script>
+
+
+
+</body>
+</html>
