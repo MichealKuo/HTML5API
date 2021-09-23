@@ -58,7 +58,8 @@
         event.dataTransfer.setData('text', event.target.id);  // 1. 設定
     };
 
-    const ballDroped = event => {
+    const ballDropp
+    ed = event => {
         const dId = event.dataTransfer.getData('text');  // 2. 取出
         event.target.appendChild( document.querySelector('#' + dId) );
     };
